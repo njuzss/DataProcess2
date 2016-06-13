@@ -4,19 +4,20 @@ pPath='Parts\';
 
 cluPath = 'Clusters\';
 
+
 imClass = char('armchair','sofa','endtable','teatable');
 K=60;         %max k among models
 view = 7;
 scene = 60;
-threshold_l = 0.1;
-threshold_h = 0.2;
+threshold_l = 0.3;
+threshold_h = 0.15;
 
 % clustering
 for i = 1:length(imClass(:,1))
 %        hog( vPath,pPath,deblank(imClass(i,:)));
-       
-          GMM(K, vPath,pPath,deblank(imClass(i,:)));
-%      filterClu(K,scene,vPath,num2str(i),cluPath,deblank(imClass(j,:)),threshold_l,threshold_h);
+%        pKmeans( K,vPath,pPath,deblank(imClass(i,:)),cluPath )
+%          GMM(K, vPath,pPath,deblank(imClass(i,:)));
+        filterClu(K,scene,vPath,cluPath,deblank(imClass(i,:)),threshold_l,threshold_h);
 end
 %% generate inter-view trainning data 
 % for i = 1:length(imClass(:,1))  

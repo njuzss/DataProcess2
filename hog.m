@@ -14,6 +14,7 @@ for j=1:patchnum
         tPath = strcat(patchPath,'\',name{j});
         patch=imread(tPath);
         featureVector = extractHOGFeatures(patch);
+%         featureVector = hogcalculator(patch);
         V(count,:)=featureVector;
 end
 
