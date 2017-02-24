@@ -1,11 +1,11 @@
-function hog( vPath,pPath,imClass )
+function hog( vPath,pPath,imClass,view )
 
 patchPath = strcat(vPath,pPath,imClass);
 Files = dir(fullfile(patchPath,'*.bmp'));
 names = {Files.name};     
 name = natsort(names); 
 
-%% HOG feature
+%% Compute HOG features
 count=0; 
 patchnum = length(name);
 V=zeros(patchnum,1296);
@@ -18,29 +18,22 @@ for j=1:patchnum
         V(count,:)=featureVector;
 end
 
-%% concate
-[x,y] = size(V);
-V = V';
-V = reshape(V,1,x*y);
-VV = zeros(x/7,y*7);
+%% Concate views for evey part
+% [x,y] = size(V);
+% V = V';
+% V = reshape(V,1,x*y);
+% VV = zeros(x/view,y*view);
+% 
+% for i = 1:x/view
+%     VV(i,:) = V((i-1)*y*view+1:i*y*view);
+% end
+% V = VV;
 
-for i = 1:x/7
-    VV(i,:) = V((i-1)*y*7+1:i*y*7);
-end
+%% Use PSLF fuse
 
-V = VV;
+%% Save mat
 hog_feature = strcat(vPath,pPath,imClass,'_hog.mat');
 save(hog_feature,'V');
-% count=0;     
-% num= importdata(fullfile([vPath,view,'\',imClass,'.txt']));
-% for i=1:nImgs
-%     numb=num(i);
-%     for j=1:numb
-%         count=count+1;
-%         tPath=sprintf('_%d.bmp',j);
-%         tPath=fullfile([patPath,'\',name{i},tPath]);
-%         patch=imread(tPath);
-%         featureVector = extractHOGFeatures(patch);
-%     end
+
 end
 

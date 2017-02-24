@@ -1,5 +1,6 @@
 function pKmeans( K,vPath,pPath,imClass,cluPath )
-%% kmeans
+tic;
+%% Kmeans clustering
 load(strcat(vPath,pPath,imClass,'_hog.mat'));
 parpool;
 
@@ -15,14 +16,12 @@ centroid  = strcat(vPath,pPath,imClass,'_centroid.mat');
 save(centroid,'C');
 delete(gcp);
 
-%% mkdir
-
+%% Make dir for output clusters 
 for i = 1:K
     mkdir(fullfile(vPath,cluPath,imClass),num2str(i));
 end
 
-
-%% collect the results
+%% Collect the results
 patPath = strcat(vPath,pPath,imClass);
 clusterPath = strcat(vPath,cluPath,imClass);
 Files = dir(fullfile(patPath,'*.bmp'));
@@ -31,8 +30,11 @@ name = natsort(names);
 
 for i = 1:length(idx)
     
-    sourcePath = strcat(patPath,'\',name{(i-1)*7+3});   
-    impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{(i-1)*7+3});   
+%     sourcePath = strcat(patPath,'\',name{(i-1)*7+3});   
+%     impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{(i-1)*7+3});   
+    sourcePath = strcat(patPath,'\',name{i});   
+    impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{i});   
+    
     Img = imread(sourcePath,'bmp');    
     imwrite(Img,impath);
     
@@ -45,5 +47,5 @@ end
 %     imwrite(Img,impath);
 %     end
 % end
-
+toc;
 end
