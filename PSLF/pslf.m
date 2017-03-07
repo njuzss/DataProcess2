@@ -1,4 +1,4 @@
-function [Vr, U, V, W, numIter,tElapsed,object] = pslf(X, Y, option, U, V, W)
+function [Vr, U, V, W, numIter,tElapsed,object] = pslf(X, Y, U,option,  V, W)
 % alpha1||X1-U1V1||2+alpha2||X2-U2V2||2+alpha3||X3-U3V3||2+beta(||W'Vlab-Y||2+gamma||W||21)
 % s.t. X,U,V>=0.
 % X=[Xl,Xul]: nf*ns, ns = nl+nul

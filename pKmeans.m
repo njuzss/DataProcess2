@@ -1,11 +1,11 @@
 function pKmeans( K,vPath,pPath,imClass,cluPath )
 tic;
 %% Kmeans clustering
-load(strcat(vPath,pPath,imClass,'_hog.mat'));
+load(strcat(vPath,pPath,imClass,'_Vr.mat'));
 parpool;
 
 opts=statset('UseParallel','always');
-[idx,C] = kmeans(V,K,'Options',opts,'emptyaction','drop','Distance','sqeuclidean');
+[idx,C] = kmeans(Vr,K,'Options',opts,'emptyaction','drop','Distance','sqeuclidean');
 %Distance
 %sqeuclidean
 %cosine
@@ -30,15 +30,16 @@ name = natsort(names);
 
 for i = 1:length(idx)
     
-%     sourcePath = strcat(patPath,'\',name{(i-1)*7+3});   
-%     impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{(i-1)*7+3});   
-    sourcePath = strcat(patPath,'\',name{i});   
-    impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{i});   
+    sourcePath = strcat(patPath,'\',name{(i-1)*7+3});   
+    impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{(i-1)*7+3});   
+%     sourcePath = strcat(patPath,'\',name{i});   
+%     impath = strcat(clusterPath,'\',num2str(idx(i)),'\',name{i});   
     
     Img = imread(sourcePath,'bmp');    
     imwrite(Img,impath);
     
 end
+%% Clustering without views
 % for i = 1:length(idx)
 %     for j = 1:7
 %     sourcePath = strcat(patPath,'\',name{(i-1)*7+j});   
@@ -47,5 +48,8 @@ end
 %     imwrite(Img,impath);
 %     end
 % end
+
+
+
 toc;
 end

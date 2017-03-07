@@ -1,5 +1,5 @@
 function hog( vPath,pPath,imClass,view )
-
+tic;
 patchPath = strcat(vPath,pPath,imClass);
 Files = dir(fullfile(patchPath,'*.bmp'));
 names = {Files.name};     
@@ -29,11 +29,19 @@ end
 % end
 % V = VV;
 
-%% Use PSLF fuse
+%% Use Multi-view fusion
+V = V';
+[x,y] = size(V);
+X = cell(1,view);
+for j = 1:view
+    for i = 1:y/view
+    X{1,j}(:,i) = V(:,(i-1)*view+j);
+    end
+end
 
 %% Save mat
 hog_feature = strcat(vPath,pPath,imClass,'_hog.mat');
-save(hog_feature,'V');
-
+save(hog_feature,'X');
+toc;
 end
 

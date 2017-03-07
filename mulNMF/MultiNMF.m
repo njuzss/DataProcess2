@@ -25,16 +25,21 @@ while j < 3
     j = j + 1;
     if j == 1
         [U{1}, V{1}] = NMF(X{1}, K, options, U_, V_);
-        printResult(V{1}, label, K, options.kmeans);
+%         disp('first done');
+%        printResult(V{1}, label, K, options.kmeans);
     else
         [U{1}, V{1}] = NMF(X{1}, K, options, U_, V{viewNum});
-        printResult(V{1}, label, K, options.kmeans);        
+        disp('one round done');
+%        printResult(V{1}, label, K, options.kmeans);        
     end
     for i = 2:viewNum
         [U{i}, V{i}] = NMF(X{i}, K, options, U_, V{i-1});
-        printResult(V{i}, label, K, options.kmeans);
+%         disp('next done');
+ %      printResult(V{i}, label, K, options.kmeans);
     end
 end
+
+disp('initialize done');
 
 optionsForPerViewNMF = options;
 oldL = 100;
@@ -67,7 +72,7 @@ while j < Rounds
         j = j - 1;
         disp('restrart this iteration');
     else
-        ac(end+1) = printResult(centroidV, label, K, options.kmeans);
+%         ac(end+1) = printResult(centroidV, label, K, options.kmeans);
     end
     
     oldU = U;

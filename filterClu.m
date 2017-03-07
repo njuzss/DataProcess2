@@ -4,7 +4,8 @@ function filterClu( K,scene,vPath,cluPath,imClass,threshold_l,threshold_h )
 
 clusterPath=strcat(vPath,cluPath,imClass,'\');
 
-indices = zeros(K,2*K);
+%3 is tmp pls change later
+indices = zeros(K,3*K);
 count = cell(1);
 
 for i = 1:K
@@ -78,7 +79,7 @@ for i= 1:length(labels)
     labels{i} = unique(labels{i});
 end
 
-labels_gmm = strcat(vPath,cluPath,imClass,'_labels');
-save(labels_gmm,'labels');
+labels_style = strcat(vPath,cluPath,imClass,'_labels');
+save(labels_style,'labels');
 
 

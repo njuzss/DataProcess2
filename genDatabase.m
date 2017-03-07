@@ -2,7 +2,7 @@ function genDatabase(vPath,cluPath,index,imClass, K)
 
 load(strcat(vPath,cluPath,imClass,'_labels.mat'));
 
-data = strcat(imClass,'.data');
+data = strcat(vPath,cluPath,imClass,'.data');
 fp = fopen(data,'w');
 
 % fprintf(fp,'%d\n',length(labels));
